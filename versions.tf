@@ -3,7 +3,7 @@ terraform {
     organization = "Kimyooseok"
 
     workspaces {
-      name = "terraform-test"
+      name = "terraform"
     }
   }
 
