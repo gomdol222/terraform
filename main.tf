@@ -19,6 +19,7 @@ locals {
   tags = {
     Name       = local.name
     Example    = local.name
+    User       = "yooseok"
     Repository = "https://github.com/terraform-aws-modules/terraform-aws-ecs"
   }
 }
@@ -28,7 +29,7 @@ locals {
 ################################################################################
 
 module "ecs_cluster" {
-  source = "../../modules/cluster"
+  source = "terraform-aws-modules/ecs/aws//modules/cluster"
 
   cluster_name = local.name
 
@@ -55,7 +56,7 @@ module "ecs_cluster" {
 ################################################################################
 
 module "ecs_service" {
-  source = "../../modules/service"
+  source = "terraform-aws-modules/ecs/aws//modules/service"
 
   name        = local.name
   cluster_arn = module.ecs_cluster.arn
@@ -178,7 +179,7 @@ module "ecs_service" {
 ################################################################################
 
 module "ecs_task_definition" {
-  source = "../../modules/service"
+  source = "terraform-aws-modules/ecs/aws//modules/service"
 
   # Service
   name           = "${local.name}-standalone"
