@@ -19,7 +19,7 @@ locals {
   tags = {
     Name       = local.name
     Example    = local.name
-    Env        = "env"
+    Env        = "test"
     User       = "yooseok"
     Repository = "https://github.com/terraform-aws-modules/terraform-aws-ecs"
   }
@@ -231,10 +231,10 @@ data "aws_ssm_parameter" "fluentbit" {
   name = "/aws/service/aws-for-fluent-bit/stable"
 }
 
-import {
-  to = aws_service_discovery_http_namespace.this
-  id = "ns-prv2ajdvkfm5cyyv"
-}
+# import {
+#   to = aws_service_discovery_http_namespace.this
+#   id = "ns-prv2ajdvkfm5cyyv"
+# }
 
 resource "aws_service_discovery_http_namespace" "this" {
   name        = local.name
