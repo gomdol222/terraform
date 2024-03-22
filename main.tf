@@ -8,7 +8,7 @@ data "aws_caller_identity" "current" {}
 
 locals {
   region = "ap-northeast-2"
-  name   = "ex-${basename(path.cwd)}"
+  name   = "yooseok-test-Cluster"
 
   vpc_cidr = "10.0.0.0/16"
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -19,6 +19,7 @@ locals {
   tags = {
     Name       = local.name
     Example    = local.name
+    Env        = "env"
     User       = "yooseok"
     Repository = "https://github.com/terraform-aws-modules/terraform-aws-ecs"
   }
@@ -228,6 +229,11 @@ module "ecs_task_definition" {
 
 data "aws_ssm_parameter" "fluentbit" {
   name = "/aws/service/aws-for-fluent-bit/stable"
+}
+
+import {
+  to = aws_service_discovery_http_namespace.this
+  id = "ns-prv2ajdvkfm5cyyv"
 }
 
 resource "aws_service_discovery_http_namespace" "this" {
